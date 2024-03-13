@@ -8,6 +8,8 @@ class Game {
         this.width = this.canvas.width;
         this.height = this.canvas.height;
         this.posX = 30;
+        this.enemyOne = new Enemy(this); 
+
 
         this.start()
 
@@ -32,7 +34,8 @@ class Game {
 
     // Draww all enemies
     render(){
-        this.context.fillRect(200, 100, 50, 150)
+        this.enemyOne.update();
+        this.enemyOne.draw();
     }
 }
 
