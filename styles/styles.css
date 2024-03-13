@@ -38,4 +38,12 @@
   box-shadow: 3px 3px 3px #000;
   text-shadow: 3px 3px 3px #000;
   background: #7a2c8a;
+}
+
+@media (max-width: 900px) {
+  #canvas1 {
+    background: url("../assets/background1080x1920.png");
+    background-size: cover;
+    background-position: center;
+  }
 }/*# sourceMappingURL=styles.css.map */

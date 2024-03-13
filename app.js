@@ -14,10 +14,11 @@ class Game {
         this.height = this.canvas.height;
 
         window.addEventListener('resize', (event) => {
-            this.resize(150, 150);
+            this.resize(event.target.width, event.target.innerHeight);
         })
     }
 
+    // Resize window
     resize(width, height){
         this.canvas.width = width;
         this.canvas.height = height;
