@@ -12,6 +12,17 @@ class Game {
         this.canvas = canvas;
         this.width = this.canvas.width;
         this.height = this.canvas.height;
+
+        window.addEventListener('resize', (event) => {
+            this.resize(150, 150);
+        })
+    }
+
+    resize(width, height){
+        this.canvas.width = width;
+        this.canvas.height = height;
+        this.width = width;
+        this.height = height;
     }
 }
 
@@ -23,5 +34,6 @@ window.addEventListener('load', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
+    const game = new Game(canvas)
 
 })
