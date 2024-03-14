@@ -35,6 +35,22 @@ class Enemy {
         this.free = true;
     }
 
+    // Update Enemy's data(coordinates position)
+    update(){
+
+        if(!this.free){
+
+            this.x += this.speedX;
+            this.y += this.speedY;
+
+            if(this.y > this.game.height){
+            
+                // Return Object to the Enemy Pool
+                this.reset();
+            }
+        }
+
+    }
 
     // Render(draw) an enemy
     draw(){
@@ -44,22 +60,7 @@ class Enemy {
         }
     }
     
-    // Update Enemy's data(coordinates position)
-    update(){
-
-        if(!this.free){
-
-            this.x += this.speedX;
-        this.y += this.speedY;
-
-        if(this.y > this.game.height){
-
-            // Return Object to the Enemy Pool
-            this.reset();
-            }
-        }
-
-    }
+    
 
 
 

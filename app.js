@@ -7,32 +7,25 @@ class Game {
         this.context = context;
         this.width = this.canvas.width;
         this.height = this.canvas.height;
-        this.posX = 30;
-        this.enemyOne = new Enemy(this); 
-
-
+    
         // Enemy Pool
         this.enemyPool = [];
         this.numberOfEnemies =  10;
 
-        
-        this.start()
+        this.start();
+        this.createEnemyPool();
 
         window.addEventListener('resize', (event) => {
             this.resize(event.target.innerWidth, event.target.innerHeight);
         })
+
+
+        console.log(this.enemyPool);
     }
 
     // Set initial values when game starts or restarts 
     start(){
         this.resize(window.innerWidth, window.innerHeight);
-    }
-
-     // Fill the Enemy Pool
-    createEnemyPool(){
-        for(let i = 0; i < this.numberOfEnemies; i++){
-            this.createEnemyPool.push(new Enemy(this));
-        }
     }
 
     // Resize window
@@ -44,10 +37,17 @@ class Game {
         this.context.fillStyle = 'white';
     }
 
-    // Draww all enemies
+    // Fill the Enemy Pool
+    createEnemyPool(){
+        for(let i = 0; i < this.numberOfEnemies; i++){
+            this.enemyPool.push(new Enemy(this));
+        }
+    }
+
+
+    // Draw all enemies
     render(){
-        this.enemyOne.update();
-        this.enemyOne.draw();
+        
     }
 }
 
