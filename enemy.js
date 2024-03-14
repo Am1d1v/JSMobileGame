@@ -16,6 +16,19 @@ class Enemy {
         // Enemies' Size
         this.width = 50;
         this.height = 50;
+
+        // Enemy status. If this status === true then it can be used again. If === false then this object is currently active int he game
+        this.free = true;
+    }
+
+    // Spawn Enemy
+    start(){
+        this.free = false;
+    }
+
+    // Delete(Remove to Object Pool) Enemy
+    reset(){
+        this.free = true;
     }
 
     // Render(draw) an enemy
