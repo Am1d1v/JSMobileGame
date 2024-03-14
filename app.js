@@ -11,6 +11,11 @@ class Game {
         this.enemyOne = new Enemy(this); 
 
 
+        // Enemy Pool
+        this.enemyPool = [];
+        this.numberOfEnemies =  10;
+
+        
         this.start()
 
         window.addEventListener('resize', (event) => {
@@ -21,6 +26,13 @@ class Game {
     // Set initial values when game starts or restarts 
     start(){
         this.resize(window.innerWidth, window.innerHeight);
+    }
+
+     // Fill the Enemy Pool
+    createEnemyPool(){
+        for(let i = 0; i < this.numberOfEnemies; i++){
+            this.createEnemyPool.push(new Enemy(this));
+        }
     }
 
     // Resize window
