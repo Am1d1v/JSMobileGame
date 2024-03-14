@@ -7,11 +7,11 @@ class Enemy {
 
         // Enemies' Coordinates
         this.x = Math.random() * this.game.width;
-        this.y = 200;
+        this.y = -this.height;
 
         // Enemies' Speed
         this.speedX = 0;
-        this.speedY = Math.random() * 4 + 1;
+        this.speedY = Math.random() * 5 + 1;
 
         // Enemies' Size
         this.width = 50;
@@ -44,9 +44,20 @@ class Enemy {
             this.y += this.speedY;
 
             if(this.y > this.game.height){
-            
                 // Return Object to the Enemy Pool
                 this.reset();
+
+                this.x = Math.random() * this.game.width;
+                this.y = -this.height;
+            }
+
+            if(this.y < 0){
+                this.y += 6;
+            }
+    
+            // Make sure always visible
+            if(this.x > this.game.wight - this.width){
+                this.x = this.game.wigth - this.width;
             }
         }
 

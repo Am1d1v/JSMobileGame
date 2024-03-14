@@ -12,6 +12,9 @@ class Game {
         this.enemyPool = [];
         this.numberOfEnemies =  10;
 
+        this.enemyTimer = 0;
+        this.enemyInterval = 1000; 
+
         this.start();
         this.createEnemyPool();
 
@@ -44,10 +47,39 @@ class Game {
         }
     }
 
+    // Get Enemy
+    getEnemy(){
+        for (let i = 0; i < this.enemyPool.length; i++) {
+            if(this.enemyPool[i].free){
+                return this.enemyPool[i];
+            }
+        }
+    }
+
+    // Handle Enemy
+    handleEnemy(deltaTime){
+        if(this.enemyTimer < this.enemyInterval){
+            this.enemyTimer += deltaTime;
+        } else {
+            this.enemyTimer = 0;
+            const enemy = this.getEnemy();
+            
+            if(enemy){
+                enemy.start();
+            }
+
+        }
+    }
+
 
     // Draw all enemies
-    render(){
-        
+    render(deltaTime){
+        this.handleEnemy(deltaTime);
+
+        this.enemyPool.forEach((enemy) => {
+            enemy.draw();
+            enemy.update();
+        })
     }
 }
 
@@ -62,10 +94,15 @@ window.addEventListener('load', () => {
 
     const game = new Game(canvas, context)
 
+
+    let lastTime = 0;
+
     // Redraw Objects. Objects movement
-    function animate(){
+    function animate(timeStamp){
+        const deltaTime = timeStamp - lastTime;
+        lastTime = timeStamp;
         context.clearRect(0, 0, canvas.width, canvas.height);
-        game.render(context);
+        game.render(deltaTime);
         requestAnimationFrame(animate);
     }
     requestAnimationFrame(animate);
