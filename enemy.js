@@ -20,6 +20,8 @@ class Enemy {
         // Enemy status. If this status === true then it can be used again. If === false then this object is currently active int he game
         this.free = true;
 
+        // Enemies' health points
+        this.lives;
         
     }
 
@@ -28,6 +30,7 @@ class Enemy {
         this.x = Math.random() * this.game.width;
         this.y = 0;
         this.free = false;
+        this.lives = 2;
     }
 
     // Delete(Remove to Object Pool) Enemy
@@ -57,7 +60,7 @@ class Enemy {
 
             // Check Collision
             if(this.game.checkCollision(this, this.game.mouse) && this.game.mouse.pressed){
-                // Reset enemy if we have collision and mouse is pressed
+                // Reset enemy(return to the object pool) if we have collision and mouse is pressed
                 this.reset();
             }
     
@@ -74,6 +77,9 @@ class Enemy {
         if(!this.free){
             this.game.context.fillStyle = 'red';
             this.game.context.fillRect(this.x, this.y, this.width, this.height);
+            // Show enemies lives
+            this.game.context.fillStyle = 'blue';
+            this.game.context.fillText(this.lives, this.x + this.width * 0.5, this.y + this.height * 0.5)
         }
     }
     

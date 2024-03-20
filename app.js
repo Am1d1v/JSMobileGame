@@ -78,6 +78,9 @@ class Game {
         this.width = width;
         this.height = height;
         this.context.fillStyle = 'white';
+        this.context.font = '50px Bangers';
+        this.context.textAlign = 'center';
+        this.context.textBaseline = 'middle';
     }
 
     // Fill the Enemy Pool
