@@ -56,8 +56,9 @@ class Enemy {
             }
 
             // Check Collision
-            if(this.game.checkCollision(this, this.game.mouse)){
-                console.log('Collision');
+            if(this.game.checkCollision(this, this.game.mouse) && this.game.mouse.pressed){
+                // Reset enemy if we have collision and mouse is pressed
+                this.reset();
             }
     
             // Make sure always visible

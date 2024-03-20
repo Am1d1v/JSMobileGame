@@ -35,7 +35,7 @@ class Game {
         window.addEventListener('mousedown', (event) => {
             event.preventDefault();
 
-            // Set Mouse position
+            // Set Mouse position and pressed status
             this.mouse.x = event.x;
             this.mouse.y = event.y;
             this.mouse.pressed = true;
@@ -43,8 +43,12 @@ class Game {
         })
 
         // Mouse up Event Listener
-        window.addEventListener('mouseup', () => {
-            
+        window.addEventListener('mouseup', (event) => {
+
+            // Set Mouse position and pressed status
+            this.mouse.x = event.x;
+            this.mouse.y = event.y;
+            this.mouse.pressed = false;
         });
 
 
