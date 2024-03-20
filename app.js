@@ -18,6 +18,8 @@ class Game {
         this.mouse = {
             x: undefined,
             y: undefined,
+            width: 1,
+            height: 1,
             pressed: false
         }
 
@@ -29,15 +31,21 @@ class Game {
             this.resize(event.target.innerWidth, event.target.innerHeight);
         })
 
-        // Mouse Controll Event Listener
+        // Pressed Mouse Controll Event Listener
         window.addEventListener('mousedown', (event) => {
             event.preventDefault();
 
             // Set Mouse position
             this.mouse.x = event.x;
             this.mouse.y = event.y;
+            this.mouse.pressed = true;
 
         })
+
+        // Mouse up Event Listener
+        window.addEventListener('mouseup', () => {
+            
+        });
 
 
         console.log(this.enemyPool);

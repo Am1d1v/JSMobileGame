@@ -54,6 +54,11 @@ class Enemy {
             if(this.y < 0){
                 this.y += 6;
             }
+
+            // Check Collision
+            if(this.game.checkCollision(this, this.game.mouse)){
+                console.log('Collision');
+            }
     
             // Make sure always visible
             if(this.x > this.game.wight - this.width){
