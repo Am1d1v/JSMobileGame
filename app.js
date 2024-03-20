@@ -33,11 +33,10 @@ class Game {
         window.addEventListener('mousedown', (event) => {
             event.preventDefault();
 
-            // Mouse position
+            // Set Mouse position
             this.mouse.x = event.x;
             this.mouse.y = event.y;
 
-            console.log(this.mouse.x, this.mouse.y);
         })
 
 
@@ -47,6 +46,17 @@ class Game {
     // Set initial values when game starts or restarts 
     start(){
         this.resize(window.innerWidth, window.innerHeight);
+    }
+
+    // Check Collision between enemy and mouse
+    checkCollision(objectOne, objectTwo){
+        // If all are true we have collision
+        return(
+            objectOne.x < objectTwo.x + objectTwo.width &&
+            objectOne.x + objectOne.width > objectTwo.x &&
+            objectOne.y < objectTwo.y + objectTwo.height &&
+            objectOne.y + objectOne.height > objectTwo.y 
+        )
     }
 
     // Resize window
