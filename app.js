@@ -15,11 +15,29 @@ class Game {
         this.enemyTimer = 0;
         this.enemyInterval = 1000; 
 
+        this.mouse = {
+            x: undefined,
+            y: undefined,
+            pressed: false
+        }
+
+
         this.start();
         this.createEnemyPool();
 
         window.addEventListener('resize', (event) => {
             this.resize(event.target.innerWidth, event.target.innerHeight);
+        })
+
+        // Mouse Controll Event Listener
+        window.addEventListener('mousedown', (event) => {
+            event.preventDefault();
+
+            // Mouse position
+            this.mouse.x = event.x;
+            this.mouse.y = event.y;
+
+            console.log(this.mouse.x, this.mouse.y);
         })
 
 
