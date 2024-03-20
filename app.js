@@ -20,7 +20,8 @@ class Game {
             y: undefined,
             width: 1,
             height: 1,
-            pressed: false
+            pressed: false,
+            fired: false
         }
 
 
@@ -40,6 +41,8 @@ class Game {
             this.mouse.y = event.y;
             this.mouse.pressed = true;
 
+            // 'Reload' mouse fire
+            this.mouse.fired = false;
         })
 
         // Mouse up Event Listener
@@ -78,6 +81,7 @@ class Game {
         this.width = width;
         this.height = height;
         this.context.fillStyle = 'white';
+        this.context.strokeStyle = 'white';
         this.context.font = '50px Bangers';
         this.context.textAlign = 'center';
         this.context.textBaseline = 'middle';

@@ -38,6 +38,11 @@ class Enemy {
         this.free = true;
     }
 
+    // Check is enemy alive
+    isAlive(){
+        return this.lives >= 1;
+    }
+
     // Update Enemy's data(coordinates position)
     update(){
 
@@ -59,7 +64,15 @@ class Enemy {
             }
 
             // Check Collision
-            if(this.game.checkCollision(this, this.game.mouse) && this.game.mouse.pressed){
+            if(this.game.checkCollision(this, this.game.mouse) && this.game.mouse.pressed && !this.game.mouse.fired){
+                // Decrease enemy lives
+                this.lives--;
+
+                this.game.mouse.fired = true;
+            }
+
+            // Reset enemy if it's dead
+            if(!this.isAlive()){
                 // Reset enemy(return to the object pool) if we have collision and mouse is pressed
                 this.reset();
             }
@@ -75,10 +88,8 @@ class Enemy {
     // Render(draw) an enemy
     draw(){
         if(!this.free){
-            this.game.context.fillStyle = 'red';
-            this.game.context.fillRect(this.x, this.y, this.width, this.height);
+            this.game.context.strokeRect(this.x, this.y, this.width, this.height);
             // Show enemies lives
-            this.game.context.fillStyle = 'blue';
             this.game.context.fillText(this.lives, this.x + this.width * 0.5, this.y + this.height * 0.5)
         }
     }
