@@ -51,12 +51,13 @@ class Enemy {
             this.x += this.speedX;
             this.y += this.speedY;
 
+            // Enemy Succesfully(Alive) moved from top of the screen to the bottom
             if(this.y > this.game.height){
                 // Return Object to the Enemy Pool
                 this.reset();
 
-                this.x = Math.random() * this.game.width;
-                this.y = -this.height;
+                // If Enemy Succesfully(Alive) moved from top of the screen to the bottom decrease player's health by 1
+                this.game.lives--;
             }
 
             if(this.y < 0){

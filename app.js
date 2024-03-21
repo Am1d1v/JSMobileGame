@@ -27,6 +27,9 @@ class Game {
         // Game Score
         this.score;
 
+        // Player's Lives. If we lose them => game over
+        this.lives;
+
 
         this.start();
         this.createEnemyPool();
@@ -88,6 +91,9 @@ class Game {
 
         // Set score to 0;
         this.score = 0;
+
+        // Set Player's Lives
+        this.lives = 10;
     }
 
     // Check Collision between enemy and mouse
@@ -150,6 +156,12 @@ class Game {
         this.context.save();
         this.context.textAlign = 'left';
         this.context.fillText('Score: ' + this.score, 20, 30);
+
+        // Playe's Health Bars
+        for(let i = 0; i < this.lives; i++){
+            this.context.fillRect(10 + 15 * i, 60, 10, 30)
+        }
+
         this.context.restore();
     }
 
