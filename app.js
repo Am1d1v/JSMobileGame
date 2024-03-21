@@ -120,6 +120,11 @@ class Game {
 
         // Set game over status
         this.gameOver = false;
+
+        // Reset all active enemies
+        this.enemyPool.forEach(enemy => {
+            enemy.reset();
+        })
     }
 
     // Check Collision between enemy and mouse
