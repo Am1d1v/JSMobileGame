@@ -99,10 +99,18 @@ class Game {
             this.mouse.pressed = false;
         });
 
+        // Select fullscreen button element
+        this.fullScreenButton = document.querySelector('#fullScreenButton');
+
+        this.fullScreenButton.addEventListener('click', this.toggleFullScreen);
+
         // Start the game keys
         window.addEventListener('keyup', (event) => {
             if (event.key === 'Enter' || event.key.toLowerCase() === 'r'){
                 this.start();
+                // Activate fullscreen
+            } else if (event.key === ' ' || event.key.toLowerCase() === 'f'){
+                this.toggleFullScreen();
             }
         });
         
@@ -149,6 +157,16 @@ class Game {
         this.context.font = '50px Bangers';
         this.context.textAlign = 'center';
         this.context.textBaseline = 'middle';
+    }
+
+    // Toggle fullscreen
+    toggleFullScreen(){
+        if(!document.fullscreenElement){
+            document.documentElement.requestFullscreen()
+        } else if (document.exitFullscreen){
+            document.exitFullscreen();
+        }
+        
     }
 
     // Fill the Enemy Pool
