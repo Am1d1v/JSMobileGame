@@ -75,6 +75,9 @@ class Enemy {
             if(!this.isAlive()){
                 // Reset enemy(return to the object pool) if we have collision and mouse is pressed
                 this.reset();
+
+                // When enemy is destroyed increase score by 1;
+                this.game.score++;
             }
     
             // Make sure always visible

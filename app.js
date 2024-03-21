@@ -24,6 +24,9 @@ class Game {
             fired: false
         }
 
+        // Game Score
+        this.score;
+
 
         this.start();
         this.createEnemyPool();
@@ -65,7 +68,6 @@ class Game {
             // 'Reload' mouse fire
             this.mouse.fired = false;
 
-            console.log(event);
         });
 
 
@@ -83,6 +85,9 @@ class Game {
     // Set initial values when game starts or restarts 
     start(){
         this.resize(window.innerWidth, window.innerHeight);
+
+        // Set score to 0;
+        this.score = 0;
     }
 
     // Check Collision between enemy and mouse
@@ -140,10 +145,19 @@ class Game {
         }
     }
 
+    // Game Test Status. Show Total Scores
+    drawStatusText(){
+        this.context.save();
+        this.context.textAlign = 'left';
+        this.context.fillText('Score: ' + this.score, 20, 30);
+        this.context.restore();
+    }
 
     // Draw all enemies
     render(deltaTime){
         this.handleEnemy(deltaTime);
+
+        this.drawStatusText();
 
         this.enemyPool.forEach((enemy) => {
             enemy.draw();
