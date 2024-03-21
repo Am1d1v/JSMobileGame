@@ -56,15 +56,16 @@ class Game {
 
         // Mobile Touch. Do the same thing as mouse down event
         window.addEventListener('touchstart', (event) => {
-            event.preventDefault();
 
             // Set Mouse position and pressed status
-            this.mouse.x = event.x;
-            this.mouse.y = event.y;
+            this.mouse.x = event.changedTouches[0].pageX;
+            this.mouse.y = event.changedTouches[0].pageY;
             this.mouse.pressed = true;
 
             // 'Reload' mouse fire
             this.mouse.fired = false;
+
+            console.log(event);
         });
 
 
@@ -72,8 +73,8 @@ class Game {
         window.addEventListener('touchend', (event) => {
 
             // Set Mouse position and pressed status
-            this.mouse.x = event.x;
-            this.mouse.y = event.y;
+            this.mouse.x = event.changedTouches[0].pageX;
+            this.mouse.y = event.changedTouches[0].pageY;
             this.mouse.pressed = false;
         });
         
