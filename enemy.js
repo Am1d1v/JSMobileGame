@@ -23,6 +23,7 @@ class Enemy {
         // Enemies' health points
         this.lives;
         
+        
     }
 
     // Spawn Enemy

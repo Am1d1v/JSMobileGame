@@ -31,6 +31,16 @@ class Game {
         this.lives;
 
 
+        // How many score player have to get to win
+        this.winningScore = 3;
+
+        this.message1 = 'Run!';
+        this.message2 = 'Press "Enter" or "R" to start';
+
+        // Is game over boolean status
+        this.gameOver;
+
+
         this.start();
         this.createEnemyPool();
 
@@ -94,6 +104,9 @@ class Game {
 
         // Set Player's Lives
         this.lives = 10;
+
+        // Set game over status
+        this.gameOver = false;
     }
 
     // Check Collision between enemy and mouse
@@ -151,6 +164,25 @@ class Game {
         }
     }
 
+    // Game Over 
+    triggerGameOver(){
+        if(!this.gameOver){
+            // Set geame over status
+            this.gameOver = true;
+
+            // Player is dead
+            if(this.lives < 1){
+                this.message1 = 'You Lost';
+                this.message2 = 'Game Over';
+
+                // Player win
+            } else if (this.score += this.winningScore){
+                this.message1 = 'Well Done';
+                this.message2 = 'Game Over';
+            }
+        }
+    }
+
     // Game Test Status. Show Total Scores
     drawStatusText(){
         this.context.save();
@@ -160,6 +192,19 @@ class Game {
         // Playe's Health Bars
         for(let i = 0; i < this.lives; i++){
             this.context.fillRect(10 + 15 * i, 60, 10, 30)
+        }
+
+        // Call game over trigger
+        if(this.lives < 1 || this.score >= this.winningScore){
+            this.triggerGameOver();
+        }
+
+        // Game Over === true
+        if(this.gameOver){
+            this.context.textAlign = 'center';
+            this.context.font = '60px Bangers'
+            this.context.fillText(this.message1, this.width * 0.5, this.height * 0.5);
+            this.context.fillText(this.message2, this.width * 0.5, this.height * 0.55);
         }
 
         this.context.restore();
