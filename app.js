@@ -25,7 +25,7 @@ class Game {
         }
 
         // Game Score
-        this.score;
+        this.score = 0;
 
         // Player's Lives. If we lose them => game over
         this.lives;
@@ -38,10 +38,16 @@ class Game {
         this.message2 = 'Press "Enter" or "R" to start';
 
         // Is game over boolean status
-        this.gameOver;
+        this.gameOver = true;
 
+        this.resize(window.innerWidth, window.innerHeight);
+        // Restart Game Button
+        this.resetButton = document.querySelector('#resetButton');
 
-        this.start();
+        this.resetButton.addEventListener('click', (event) => {
+            this.start();
+        })
+
         this.createEnemyPool();
 
         window.addEventListener('resize', (event) => {
@@ -91,6 +97,13 @@ class Game {
             this.mouse.x = event.changedTouches[0].pageX;
             this.mouse.y = event.changedTouches[0].pageY;
             this.mouse.pressed = false;
+        });
+
+        // Start the game keys
+        window.addEventListener('keyup', (event) => {
+            if (event.key === 'Enter' || event.key.toLowerCase() === 'r'){
+                this.start();
+            }
         });
         
     }
@@ -212,7 +225,10 @@ class Game {
 
     // Draw all enemies
     render(deltaTime){
-        this.handleEnemy(deltaTime);
+        // Enemies will not spawn untill the game starts
+        if(!this.gameOver) {
+            this.handleEnemy(deltaTime);
+        };
 
         this.drawStatusText();
 
