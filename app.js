@@ -30,6 +30,8 @@ class Game {
         // Player's Lives. If we lose them => game over
         this.lives;
 
+        // Crew Mmebers Image
+        this.crewImage = document.querySelector('#crew');
 
         // How many score player have to get to win
         this.winningScore = 3;
@@ -102,7 +104,9 @@ class Game {
         // Select fullscreen button element
         this.fullScreenButton = document.querySelector('#fullScreenButton');
 
-        this.fullScreenButton.addEventListener('click', this.toggleFullScreen);
+        this.fullScreenButton.addEventListener('click', (event) => {
+            this.toggleFullScreen();
+        });
 
         // Start the game keys
         window.addEventListener('keyup', (event) => {
@@ -124,7 +128,7 @@ class Game {
         this.score = 0;
 
         // Set Player's Lives
-        this.lives = 10;
+        this.lives = 15;
 
         // Set game over status
         this.gameOver = false;
@@ -227,7 +231,7 @@ class Game {
 
         // Playe's Health Bars
         for(let i = 0; i < this.lives; i++){
-            this.context.fillRect(10 + 15 * i, 60, 10, 30)
+            this.context.drawImage(this.crewImage, 15 + 20 * i, 60, 15, 30)
         }
 
         // Call game over trigger

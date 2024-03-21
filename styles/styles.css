@@ -40,6 +40,10 @@
   background: #7a2c8a;
 }
 
+.assets {
+  display: none;
+}
+
 @media (max-width: 900px) {
   #canvas1 {
     background: url("../assets/background1080x1920.png");
