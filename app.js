@@ -54,8 +54,29 @@ class Game {
             this.mouse.pressed = false;
         });
 
+        // Mobile Touch. Do the same thing as mouse down event
+        window.addEventListener('touchstart', (event) => {
+            event.preventDefault();
 
-        console.log(this.enemyPool);
+            // Set Mouse position and pressed status
+            this.mouse.x = event.x;
+            this.mouse.y = event.y;
+            this.mouse.pressed = true;
+
+            // 'Reload' mouse fire
+            this.mouse.fired = false;
+        });
+
+
+        // Mobile Touch. Do the same thing as mouse up event
+        window.addEventListener('touchend', (event) => {
+
+            // Set Mouse position and pressed status
+            this.mouse.x = event.x;
+            this.mouse.y = event.y;
+            this.mouse.pressed = false;
+        });
+        
     }
 
     // Set initial values when game starts or restarts 
