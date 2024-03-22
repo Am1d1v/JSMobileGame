@@ -17,7 +17,11 @@ class Game {
 
         // Sprite Controll
         this.spriteTimer = 0;
+
+        // How fast enemy model  disappears
         this.spriteInterval = 200;
+
+        // Update sptire status. If enemy destroyed spriteUpdate = true;
         this.spriteUpdate = false;
 
         this.mouse = {
@@ -278,10 +282,15 @@ class Game {
 
         this.drawStatusText();
 
+
+        for (let i = this.enemyPool.length - 1; i >= 0; i-- ){
+            this.enemyPool[i].update(deltaTime);
+        }
+
         this.enemyPool.forEach((enemy) => {
             enemy.draw();
-            enemy.update();
         })
+
     }
 }
 

@@ -23,9 +23,12 @@ class Enemy {
         // Serves to show sprite of destroyed enemy
         this.lastFrame;
 
+        // Size of enemy. 
+        this.sizeModifier = Math.random() * 0.9 + 0.3;
+
         // Enemies' Size
-        this.width = this.spriteWidth;
-        this.height = this.spriteHeight;
+        this.width = this.spriteWidth * this.sizeModifier;
+        this.height = this.spriteHeight * this.sizeModifier;
 
         // Enemy status. If this status === true then it can be used again. If === false then this object is currently active int he game
         this.free = true;
