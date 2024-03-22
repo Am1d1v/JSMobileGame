@@ -10,8 +10,8 @@ class Enemy {
         this.y = -this.height;
 
         // Enemies' Speed
-        this.speedX = 0;
-        this.speedY = Math.random() * 5 + 1;
+        this.speedX;
+        this.speedY;
 
         // Enemies' Size
         this.width = 50;
@@ -99,9 +99,24 @@ class Enemy {
         }
     }
     
-    
+
+}
 
 
+// Different Enemy Types
+// Beetlemorph Enemy Class
+class Beetlemorph extends Enemy {
+    constructor(game){
+        super(game);
+        this.image = document.querySelector('#beetlemorph');
+    }
 
+    // Spawn Enemy
+    start(){
+        super.start();
+        this.speedX = 0;
+        this.speedY = Math.random() * 0.2;
+
+    }
 
 }
