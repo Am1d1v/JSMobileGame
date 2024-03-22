@@ -17,6 +17,12 @@ class Enemy {
         this.spriteWidth = 100;
         this.spriteHeight = 100;
 
+        // Sprite's frame. Help to randomize image of spawned enemies
+        this.frameY;
+        this.frameX;
+        // Serves to show sprite of destroyed enemy
+        this.lastFrame;
+
         // Enemies' Size
         this.width = this.spriteWidth;
         this.height = this.spriteHeight;
@@ -34,6 +40,8 @@ class Enemy {
     start(){
         this.x = Math.random() * this.game.width;
         this.y = 0;
+        this.frameY = Math.floor(Math.random() * 3);
+        this.frameX = 0;
         this.free = false;
     }
 
@@ -78,20 +86,29 @@ class Enemy {
             if(this.y < 0){
                 this.y += 6;
             }
-
-            // Reset enemy if it's dead
-            if(!this.isAlive()){
-                // Reset enemy(return to the object pool) if we have collision and mouse is pressed
-                this.reset();
-
-                // When enemy is destroyed increase score by 1;
-                this.game.score++;
-            }
     
             // Make sure always visible
             if(this.x > this.game.wight - this.width){
                 this.x = this.game.wigth - this.width;
             }
+
+            // Show frame of destroyed enemy
+            if(!this.isAlive()){
+                this.frameX++;
+
+                if(this.frameX > this.lastFrame){
+                    // Reset enemy(return to the object pool) if we have collision and mouse is pressed
+                    this.reset();
+
+                    if(!this.game.gameOver){
+
+                        // When enemy is destroyed increase score by 1;
+                        this.game.score++;
+                    }
+                }
+            }
+
+
         }
 
     }
@@ -101,7 +118,7 @@ class Enemy {
         if(!this.free){
 
             // Draw Enemy Image
-            this.game.context.drawImage(this.image, 0, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height)
+            this.game.context.drawImage(this.image, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height)
 
             this.game.context.strokeRect(this.x, this.y, this.width, this.height);
 
@@ -128,6 +145,7 @@ class Beetlemorph extends Enemy {
         this.speedX = 0;
         this.speedY = Math.random() * 2 + 1;
         this.lives = 2;
+        this.lastFrame = 3;
     }
 
     update(){
