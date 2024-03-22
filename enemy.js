@@ -127,10 +127,15 @@ class Enemy {
             // Draw Enemy Image
             this.game.context.drawImage(this.image, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height)
 
+            // If debug modes is activated => show hitboxes and heath points
+            if(this.game.debug){
+                
             this.game.context.strokeRect(this.x, this.y, this.width, this.height);
 
             // Show enemies lives
             this.game.context.fillText(this.lives, this.x + this.width * 0.5, this.y + this.height * 0.5)
+            }
+
         }
     }
     

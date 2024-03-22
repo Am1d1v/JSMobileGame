@@ -22,7 +22,10 @@ class Game {
         this.spriteInterval = 200;
 
         // Update sptire status. If enemy destroyed spriteUpdate = true;
-        this.spriteUpdate = false;
+        this.spriteUpdate = true;
+
+        // Debug mode status. It helps us to see enemies' hitbox and health points.
+        this.debug = false; 
 
         this.mouse = {
             x: undefined,
@@ -119,12 +122,18 @@ class Game {
 
         // Start the game keys
         window.addEventListener('keyup', (event) => {
+
             if (event.key === 'Enter' || event.key.toLowerCase() === 'r'){
                 this.start();
                 // Activate fullscreen
             } else if (event.key === ' ' || event.key.toLowerCase() === 'f'){
                 this.toggleFullScreen();
+
+                // Toggle debug status.
+            } else if (event.key.toLocaleLowerCase() === 'd'){
+                this.debug = !this.debug;
             }
+
         });
         
     }
