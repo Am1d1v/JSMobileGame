@@ -13,9 +13,13 @@ class Enemy {
         this.speedX;
         this.speedY;
 
+        // Sprites
+        this.spriteWidth = 100;
+        this.spriteHeight = 100;
+
         // Enemies' Size
-        this.width = 50;
-        this.height = 50;
+        this.width = this.spriteWidth;
+        this.height = this.spriteHeight;
 
         // Enemy status. If this status === true then it can be used again. If === false then this object is currently active int he game
         this.free = true;
@@ -95,7 +99,12 @@ class Enemy {
     // Render(draw) an enemy
     draw(){
         if(!this.free){
+
+            // Draw Enemy Image
+            this.game.context.drawImage(this.image, 0, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height)
+
             this.game.context.strokeRect(this.x, this.y, this.width, this.height);
+
             // Show enemies lives
             this.game.context.fillText(this.lives, this.x + this.width * 0.5, this.y + this.height * 0.5)
         }
@@ -117,7 +126,7 @@ class Beetlemorph extends Enemy {
     start(){
         super.start();
         this.speedX = 0;
-        this.speedY = Math.random() * 2;
+        this.speedY = Math.random() * 2 + 1;
         this.lives = 2;
     }
 
