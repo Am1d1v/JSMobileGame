@@ -31,7 +31,6 @@ class Enemy {
         this.x = Math.random() * this.game.width;
         this.y = 0;
         this.free = false;
-        this.lives = 2;
     }
 
     // Delete(Remove to Object Pool) Enemy
@@ -42,6 +41,17 @@ class Enemy {
     // Check is enemy alive
     isAlive(){
         return this.lives >= 1;
+    }
+
+    // Hits to enemies
+    hit(){
+        // Check Collision
+        if(this.game.checkCollision(this, this.game.mouse) && this.game.mouse.pressed && !this.game.mouse.fired){
+            // Decrease enemy lives
+            this.lives--;
+
+            this.game.mouse.fired = true;
+        }
     }
 
     // Update Enemy's data(coordinates position)
@@ -63,14 +73,6 @@ class Enemy {
 
             if(this.y < 0){
                 this.y += 6;
-            }
-
-            // Check Collision
-            if(this.game.checkCollision(this, this.game.mouse) && this.game.mouse.pressed && !this.game.mouse.fired){
-                // Decrease enemy lives
-                this.lives--;
-
-                this.game.mouse.fired = true;
             }
 
             // Reset enemy if it's dead
@@ -115,8 +117,17 @@ class Beetlemorph extends Enemy {
     start(){
         super.start();
         this.speedX = 0;
-        this.speedY = Math.random() * 0.2;
+        this.speedY = Math.random() * 2;
+        this.lives = 2;
+    }
 
+    update(){
+        super.update();
+        if(!this.free){
+            if(this.isAlive()){
+                this.hit();
+            }
+        }
     }
 
 }

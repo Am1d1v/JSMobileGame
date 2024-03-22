@@ -176,7 +176,7 @@ class Game {
     // Fill the Enemy Pool
     createEnemyPool(){
         for(let i = 0; i < this.numberOfEnemies; i++){
-            this.enemyPool.push(new Enemy(this));
+            this.enemyPool.push(new Beetlemorph(this));
         }
     }
 
