@@ -94,18 +94,22 @@ class Enemy {
 
             // Show frame of destroyed enemy
             if(!this.isAlive()){
-                this.frameX++;
 
-                if(this.frameX > this.lastFrame){
-                    // Reset enemy(return to the object pool) if we have collision and mouse is pressed
-                    this.reset();
+                if(this.game.spriteUpdate){
+                    this.frameX++;
 
-                    if(!this.game.gameOver){
-
-                        // When enemy is destroyed increase score by 1;
-                        this.game.score++;
+                    if(this.frameX > this.lastFrame){
+                        // Reset enemy(return to the object pool) if we have collision and mouse is pressed
+                        this.reset();
+    
+                        if(!this.game.gameOver){
+    
+                            // When enemy is destroyed increase score by 1;
+                            this.game.score++;
+                        }
                     }
                 }
+                
             }
 
 

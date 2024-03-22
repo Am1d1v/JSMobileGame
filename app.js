@@ -15,6 +15,11 @@ class Game {
         this.enemyTimer = 0;
         this.enemyInterval = 1000; 
 
+        // Sprite Controll
+        this.spriteTimer = 0;
+        this.spriteInterval = 200;
+        this.spriteUpdate = false;
+
         this.mouse = {
             x: undefined,
             y: undefined,
@@ -216,10 +221,21 @@ class Game {
                 this.message2 = 'Game Over';
 
                 // Player win
-            } else if (this.score += this.winningScore){
+            } else if (this.score = this.winningScore){
                 this.message1 = 'Well Done';
                 this.message2 = 'Game Over';
             }
+        }
+    }
+
+    // Handle Sprite Controll
+    handleSpriteTimer(deltaTime){
+        if(this.spriteTimer < this.spriteInterval){
+            this.spriteTimer += deltaTime;
+            this.spriteUpdate = false;
+        } else {
+            this.spriteTimer = 0;
+            this.spriteUpdate = true;
         }
     }
 
@@ -252,6 +268,9 @@ class Game {
 
     // Draw all enemies
     render(deltaTime){
+
+        this.handleSpriteTimer(deltaTime);
+
         // Enemies will not spawn untill the game starts
         if(!this.gameOver) {
             this.handleEnemy(deltaTime);
