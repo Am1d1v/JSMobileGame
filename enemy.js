@@ -20,8 +20,11 @@ class Enemy {
         // Sprite's frame. Help to randomize image of spawned enemies
         this.frameY;
         this.frameX;
-        // Serves to show sprite of destroyed enemy
+        // Serves to show sprite of destroyed enemy. Last horizontal frame of the image
         this.lastFrame;
+
+        this.minFrame;
+        this.maxFrame;
 
         // Size of enemy. 
         this.sizeModifier = Math.random() * 0.9 + 0.3;
@@ -191,6 +194,15 @@ class Lobstermorph extends Enemy {
         super.update();
 
         if(!this.free){
+            // Handle Sprite State
+            if(this.lives >= 3){
+                this.maxFrame = 0;
+            } else if (this.lives === 2){
+                this.maxFrame = 3;
+            } else if (this.lives === 1){
+                this.maxFrame = 7;
+            }
+
             if(this.isAlive()){
                 this.hit();
                 if(this.frameX < this.maxFrame && this.game.spriteUpdate()){
