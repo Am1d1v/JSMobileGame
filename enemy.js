@@ -144,6 +144,7 @@ class Enemy {
 
 
 // Different Enemy Types
+
 // Beetlemorph Enemy Class
 class Beetlemorph extends Enemy {
     constructor(game){
@@ -165,6 +166,36 @@ class Beetlemorph extends Enemy {
         if(!this.free){
             if(this.isAlive()){
                 this.hit();
+            }
+        }
+    }
+
+}
+
+// Lobstermorph Enemy Class
+class Lobstermorph extends Enemy {
+    constructor(game){
+        super(game);
+        this.image = document.querySelector('#lobstermorph');
+        this.lastFrame = 14;
+    }
+
+    start(){
+        super.start();
+        this.speedX = 0;
+        this.speedY = Math.random() * 0.5 + 0.2;
+        this.lives = 3;
+    }
+
+    update(){
+        super.update();
+
+        if(!this.free){
+            if(this.isAlive()){
+                this.hit();
+                if(this.frameX < this.maxFrame && this.game.spriteUpdate()){
+                    this.frameX++;
+                }
             }
         }
     }
