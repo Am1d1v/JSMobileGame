@@ -17,6 +17,13 @@ class Enemy {
         this.spriteWidth = 100;
         this.spriteHeight = 100;
 
+        // Size of enemy. 
+        this.sizeModifier = Math.random() * 0.9 + 0.3;
+
+        // Enemies' Size
+        this.width = this.spriteWidth * this.sizeModifier;
+        this.height = this.spriteHeight * this.sizeModifier;
+
         // Sprite's frame. Help to randomize image of spawned enemies
         this.frameY;
         this.frameX;
@@ -26,19 +33,12 @@ class Enemy {
         this.minFrame;
         this.maxFrame;
 
-        // Size of enemy. 
-        this.sizeModifier = Math.random() * 0.9 + 0.3;
-
-        // Enemies' Size
-        this.width = this.spriteWidth * this.sizeModifier;
-        this.height = this.spriteHeight * this.sizeModifier;
 
         // Enemy status. If this status === true then it can be used again. If === false then this object is currently active int he game
         this.free = true;
 
         // Enemies' health points
         this.lives;
-        
         
     }
 
@@ -205,7 +205,7 @@ class Lobstermorph extends Enemy {
 
             if(this.isAlive()){
                 this.hit();
-                if(this.frameX < this.maxFrame && this.game.spriteUpdate()){
+                if(this.frameX < this.maxFrame && this.game.spriteUpdate){
                     this.frameX++;
                 }
             }
