@@ -141,6 +141,16 @@ class Game {
         
     }
 
+    // Generate Crew ember Image
+    generateCrewMember(){
+        this.crewMembers = [];
+
+        // Each life have a random crew member image assigned
+        for(let i = 0; i < this.lives; i++){
+            this.crewMembers.push({frameX: Math.floor(Math.random() * 5), frameY: Math.floor(Math.random() * 5)});
+        }
+    }
+
     // Set initial values when game starts or restarts 
     start(){
         this.resize(window.innerWidth, window.innerHeight);
@@ -150,6 +160,8 @@ class Game {
 
         // Set Player's Lives
         this.lives = 15;
+
+        this.generateCrewMember()
 
         // Set game over status
         this.gameOver = false;
@@ -171,15 +183,6 @@ class Game {
         )
     }
 
-    // Generate Crew ember Image
-    generateCrewMember(){
-        this.crewMembers = [];
-
-        // Each life have a random crew member image assigned
-        for(let i = 0; i < this.lives; i++){
-            this.crewMembers.push({frameX: Math.floor(Math.random() * 5), frameY: Math.floor(Math.random() * 5)});
-        }
-    }
 
     // Resize window
     resize(width, height){
@@ -280,7 +283,9 @@ class Game {
 
         // Playe's Health Bars
         for(let i = 0; i < this.lives; i++){
-            this.context.drawImage(this.crewImage, 15 + 20 * i, 60, 15, 30)
+            const width = 20;
+            const height = 45;
+            this.context.drawImage(this.crewImage, width * this.crewMembers[i].frameX, height * this.crewMembers[i].frameY, width, height, 15 + 20 * i, 60, width, height)
         }
 
         // Call game over trigger
