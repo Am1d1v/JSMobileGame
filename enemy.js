@@ -228,14 +228,18 @@ class Phantommorph extends Enemy {
     
     start(){
         super.start();
-        this.speedX = 0;
-        this.speedY = 1;
+        this.speedX = Math.random() * 2 - 1;
+        this.speedY = Math.random() * 0.5 + 0.2;
         this.lives = 1;
     }
 
     update(){
         super.update();
 
+            // Bounce left/right so enemies cannot move off screen
+            if(this.x <= 0 || this.x >= this.game.width - this.width){
+                this.speedX *= -1;
+            }
 
             if(this.isAlive()){
                 this.hit();
