@@ -224,6 +224,11 @@ class Phantommorph extends Enemy {
         super(game)
         this.image = document.querySelector('#phantommorph');
         this.lastFrame = 14;
+
+        // All possible states
+        this.states = [new Flying(game, this), new Phasing(game, this), new Imploding(game, this)];
+
+        this.currentState;
     }
     
     start(){
@@ -235,6 +240,15 @@ class Phantommorph extends Enemy {
         // Certain Frame Range
         this.minFrame = 0;
         this.maxFrame = 2;
+
+        // Set current state
+        this.setState( Math.floor(Math.random() * 2) );
+    }
+
+    // Set Different State
+    setState(state){
+        this.currentState = this.states[state];
+        this.currentState.start();
     }
 
     handleAnimationFrame(){
@@ -248,9 +262,11 @@ class Phantommorph extends Enemy {
     }
 
     update(){
-        super.update();
+        if(!this.free){
+            super.update();
 
             this.handleAnimationFrame();
+            this.currentState.update();
 
             // Bounce left/right so enemies cannot move off screen
             if(this.x <= 0 || this.x >= this.game.width - this.width){
@@ -260,6 +276,7 @@ class Phantommorph extends Enemy {
             if(this.isAlive()){
                 this.hit();
             }
+        }
     }
     
 }
@@ -275,11 +292,18 @@ class EnemyState{
 
 
 // State Subclasses
+// Flying - default enemy state, while it is existing in this "dimension"
+// Phasing
+// Imploding 
 
 class Flying extends EnemyState {
 
     start(){
+        this.enemy.minFrame = 0;
+        this.enemy.maxFrame = 2;
 
+        // Make enemy immediately invisible
+        this.enemy.frameX = this.enemy.minFrame;
     }
 
     update(){
@@ -291,7 +315,11 @@ class Flying extends EnemyState {
 class Phasing extends EnemyState {
 
     start(){
+        this.enemy.minFrame = 3;
+        this.enemy.maxFrame = 5;
 
+        // Make enemy immediately invisible
+        this.enemy.frameX = this.enemy.minFrame;
     }
 
     update(){
@@ -301,9 +329,13 @@ class Phasing extends EnemyState {
 
 
 class Imploding extends EnemyState {
-    
-    start(){
 
+    start(){
+        this.enemy.minFrame = 6;
+        this.enemy.maxFrame = this.enemy.lastFrame + 1;
+
+        // Make enemy immediately invisible
+        this.enemy.frameX = this.enemy.minFrame;
     }
 
     update(){
