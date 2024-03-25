@@ -352,7 +352,6 @@ class Phasing extends EnemyState {
     start(){
         this.enemy.minFrame = 3;
         this.enemy.maxFrame = 5;
-
         // Make enemy immediately invisible
         this.enemy.frameX = this.enemy.minFrame;
     }
@@ -360,9 +359,6 @@ class Phasing extends EnemyState {
     update(){
         // Check Collision
         if(this.game.checkCollision(this.enemy, this.game.mouse) && this.game.mouse.pressed){
-            // Decrease enemy lives
-            this.lives--;
-
 
             // When we attack enemy in Phasing state we give it speed boost
             this.enemy.y += 30;
