@@ -231,10 +231,26 @@ class Phantommorph extends Enemy {
         this.speedX = Math.random() * 2 - 1;
         this.speedY = Math.random() * 0.5 + 0.2;
         this.lives = 1;
+
+        // Certain Frame Range
+        this.minFrame = 0;
+        this.maxFrame = 2;
+    }
+
+    handleAnimationFrame(){
+        if(this.game.spriteUpdate){
+            if(this.frameX < this.maxFrame){
+                this.frameX++;
+            } else {
+                this.frameX = this.minFrame
+            }
+        }
     }
 
     update(){
         super.update();
+
+            this.handleAnimationFrame();
 
             // Bounce left/right so enemies cannot move off screen
             if(this.x <= 0 || this.x >= this.game.width - this.width){
@@ -243,9 +259,6 @@ class Phantommorph extends Enemy {
 
             if(this.isAlive()){
                 this.hit();
-                if(this.frameX < this.maxFrame && this.game.spriteUpdate){
-                    this.frameX++;
-                }
             }
     }
     
