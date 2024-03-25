@@ -229,6 +229,9 @@ class Phantommorph extends Enemy {
         this.states = [new Flying(game, this), new Phasing(game, this), new Imploding(game, this)];
 
         this.currentState;
+
+        this.switchTimer = 0;
+        this.switchInterval = Math.random() * 1800 + 1000;
     }
     
     start(){
@@ -261,9 +264,20 @@ class Phantommorph extends Enemy {
         }
     }
 
-    update(){
+    // Switch state
+    switch(){
+        if(this.currentState === this.states[0]){
+            // Set Phasing State
+            this.setState(1);
+        } else {
+            // Set Imploding State
+            this.setState(0);
+        }
+    }
+
+    update(deltaTime){
+        super.update();
         if(!this.free){
-            super.update();
 
             this.handleAnimationFrame();
             this.currentState.update();
@@ -273,8 +287,19 @@ class Phantommorph extends Enemy {
                 this.speedX *= -1;
             }
 
+            // Check is enemy got hit
             if(this.isAlive()){
                 this.hit();
+            }
+
+            // Switch Enemy States
+            if(this.isAlive()){
+                if(this.switchTimer < this.switchInterval){
+                    this.switchTimer += deltaTime;
+                } else {
+                    this.sizeModifier = 0;
+                    this.switch();
+                }
             }
         }
     }
