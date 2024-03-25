@@ -275,6 +275,15 @@ class Phantommorph extends Enemy {
         }
     }
 
+    // Check collision between mouse and enemy object
+    hit(){
+        super.hit();
+        if(!this.isAlive()){
+            // If enemy is not alive set Impoding state
+            this.setState(2);
+        }
+    }
+
     update(deltaTime){
         super.update();
         if(!this.free){
@@ -332,7 +341,8 @@ class Flying extends EnemyState {
     }
 
     update(){
-
+        this.enemy.hit();
+        this.enemy.handleAnimationFrame();
     }
 }
 
@@ -348,7 +358,15 @@ class Phasing extends EnemyState {
     }
 
     update(){
+        // Check Collision
+        if(this.game.checkCollision(this.enemy, this.game.mouse) && this.game.mouse.pressed){
+            // Decrease enemy lives
+            this.lives--;
 
+
+            // When we attack enemy in Phasing state we give it speed boost
+            this.enemy.y += 30;
+        }
     }
 }
 
