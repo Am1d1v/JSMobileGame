@@ -263,3 +263,50 @@ class Phantommorph extends Enemy {
     }
     
 }
+
+
+// Enemy State Design Pattern
+class EnemyState{
+    constructor(game, enemy) {
+        this.game = game;
+        this.enemy = enemy;
+    }
+}
+
+
+// State Subclasses
+
+class Flying extends EnemyState {
+
+    start(){
+
+    }
+
+    update(){
+
+    }
+}
+
+
+class Phasing extends EnemyState {
+
+    start(){
+
+    }
+
+    update(){
+
+    }
+}
+
+
+class Imploding extends EnemyState {
+    
+    start(){
+
+    }
+
+    update(){
+
+    }
+}
