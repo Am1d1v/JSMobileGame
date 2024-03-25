@@ -43,7 +43,10 @@ class Game {
         this.lives;
 
         // Crew Mmebers Image
-        this.crewImage = document.querySelector('#crew');
+        this.crewImage = document.querySelector('#crewSprite');
+        // Certain Crew Member
+        this.crewMembers = [];
+
 
         // How many score player have to get to win
         this.winningScore = 3;
@@ -166,6 +169,16 @@ class Game {
             objectOne.y < objectTwo.y + objectTwo.height &&
             objectOne.y + objectOne.height > objectTwo.y 
         )
+    }
+
+    // Generate Crew ember Image
+    generateCrewMember(){
+        this.crewMembers = [];
+
+        // Each life have a random crew member image assigned
+        for(let i = 0; i < this.lives; i++){
+            this.crewMembers.push({frameX: Math.floor(Math.random() * 5), frameY: Math.floor(Math.random() * 5)});
+        }
     }
 
     // Resize window
