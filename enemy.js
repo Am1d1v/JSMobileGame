@@ -85,8 +85,12 @@ class Enemy {
                 // Return Object to the Enemy Pool
                 this.reset();
 
-                // If Enemy Succesfully(Alive) moved from top of the screen to the bottom decrease player's health by 1
-                this.game.lives--;
+                if(!this.game.gameOver){
+
+                    // If Enemy Succesfully(Alive) moved from top of the screen to the bottom decrease player's health by 1
+                    this.game.lives--;
+                }
+
             }
 
             if(this.y < 0){
@@ -212,4 +216,33 @@ class Lobstermorph extends Enemy {
         }
     }
 
+}
+
+// Phantommorph Enemy Class
+class Phantommorph extends Enemy {
+    constructor(game){
+        super(game)
+        this.image = document.querySelector('#phantommorph');
+        this.lastFrame = 14;
+    }
+    
+    start(){
+        super.start();
+        this.speedX = 0;
+        this.speedY = 1;
+        this.lives = 1;
+    }
+
+    update(){
+        super.update();
+
+
+            if(this.isAlive()){
+                this.hit();
+                if(this.frameX < this.maxFrame && this.game.spriteUpdate){
+                    this.frameX++;
+                }
+            }
+    }
+    
 }

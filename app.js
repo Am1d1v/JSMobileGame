@@ -208,18 +208,24 @@ class Game {
     }
 
     // Fill the Enemy Pool
+    // createEnemyPool(){
+    //     for(let i = 0; i < this.numberOfEnemies; i++){
+    //         // Random Enemy Class Spawn
+    //         const randomEnemyClass = Math.random();
+    //         if(randomEnemyClass < 0.8){
+    //             this.enemyPool.push(new Lobstermorph(this));
+    //         } else {
+    //             this.enemyPool.push(new Beetlemorph(this));
+    //         }
+
+    //     }
+    // }
     createEnemyPool(){
         for(let i = 0; i < this.numberOfEnemies; i++){
-            // Random Enemy Class Spawn
-            const randomEnemyClass = Math.random();
-            if(randomEnemyClass < 0.8){
-                this.enemyPool.push(new Lobstermorph(this));
-            } else {
-                this.enemyPool.push(new Beetlemorph(this));
-            }
-
-        }
+          
+            this.enemyPool.push(new Phantommorph(this))
     }
+}
 
     // Get Enemy
     getEnemy(){
